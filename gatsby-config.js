@@ -4,27 +4,19 @@ module.exports = {
     siteUrl: `https://mynotes.gatsbyjs.io/`,
   },
   plugins: [
-    "gatsby-plugin-styled-components",
+    // "gatsby-plugin-styled-components",
     "gatsby-plugin-image",
-    "gatsby-plugin-react-helmet",
-    "gatsby-plugin-mdx",
+    // "gatsby-plugin-react-helmet",
+    // "gatsby-plugin-mdx",
     "gatsby-plugin-sharp",
-    "gatsby-transformer-sharp",
+    // "gatsby-transformer-sharp",
     {
       resolve: "gatsby-source-filesystem",
       options: {
-        name: "images",
-        path: "./src/images/",
+        name: "blog",
+        path: `${__dirname}/blog`,
       },
-      __key: "images",
-    },
-    {
-      resolve: "gatsby-source-filesystem",
-      options: {
-        name: "pages",
-        path: "./src/pages/",
-      },
-      __key: "pages",
+      __key: "blog",
     },
   ],
 };

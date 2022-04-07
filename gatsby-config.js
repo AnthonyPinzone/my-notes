@@ -4,7 +4,7 @@ module.exports = {
     siteUrl: `https://mynotes.gatsbyjs.io/`,
   },
   plugins: [
-    // "gatsby-plugin-styled-components",
+    "gatsby-plugin-postcss",
     "gatsby-plugin-image",
     // "gatsby-plugin-react-helmet",
     "gatsby-plugin-mdx",

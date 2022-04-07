@@ -1,17 +1,59 @@
 import * as React from "react";
+import { Link, graphql } from "gatsby";
+import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import Layout from "../components/layout";
-import { StaticImage } from "gatsby-plugin-image";
 
-const IndexPage = () => {
+const HomePage = ({ data }) => {
   return (
-    <Layout pageTitle='Home Page'>
-      <p>I'm making this by following the Gatsby tutorial.</p>
-      <StaticImage
-        alt='Kansas City Chiefs Wide Receiver Tyreek Hill was Traded to the Miami Dolphins'
-        src='https://dolphinswire.usatoday.com/wp-content/uploads/sites/53/2022/03/Tyreek-Hill_TA.png?w=1000&h=600'
-      />
+    <Layout pageTitle='Books'>
+      {data.allMdx.nodes.map((node) => {
+        if (node.frontmatter.type === "book") {
+          const image = getImage(node.frontmatter.bookCover);
+          return (
+            <figure key={node.id}>
+              <Link to={node.slug}>
+                <GatsbyImage image={image} alt={node.frontmatter.bookTitle} />
+                <figcaption>
+                  {node.frontmatter.bookTitle} ({node.slug})
+                </figcaption>
+              </Link>
+            </figure>
+          );
+        }
+      })}
     </Layout>
   );
 };
 
-export default IndexPage;
+export const query = graphql`
+  query {
+    allMdx {
+      nodes {
+        id
+        slug
+        frontmatter {
+          type
+          bookTitle
+          bookCover {
+            childImageSharp {
+              gatsbyImageData
+            }
+          }
+          chapterName
+          chapterNumber
+          date
+          hero_image {
+            childImageSharp {
+              gatsbyImageData
+            }
+          }
+          hero_image_alt
+          hero_image_credit_link
+          hero_image_credit_text
+        }
+      }
+    }
+  }
+`;
+
+export default HomePage;

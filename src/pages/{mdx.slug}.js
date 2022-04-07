@@ -2,7 +2,7 @@ import * as React from "react";
 import { graphql, Link } from "gatsby";
 import { MDXRenderer } from "gatsby-plugin-mdx";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
-import Layout from "../../components/layout";
+import Layout from "../components/layout";
 
 const Books = ({ data }) => {
   const bookSlug = data.mdx.slug.split("/")[0];

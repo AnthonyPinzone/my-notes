@@ -5,22 +5,27 @@ import Layout from "../components/layout";
 
 const HomePage = ({ data }) => {
   return (
-    <Layout pageTitle='Books'>
-      {data.allMdx.nodes.map((node) => {
-        if (node.frontmatter.type === "book") {
-          const image = getImage(node.frontmatter.bookCover);
-          return (
-            <figure key={node.id}>
-              <Link to={node.slug}>
-                <GatsbyImage image={image} alt={node.frontmatter.bookTitle} />
-                <figcaption>
-                  {node.frontmatter.bookTitle} ({node.slug})
-                </figcaption>
-              </Link>
-            </figure>
-          );
-        }
-      })}
+    <Layout>
+      <div className='container mx-auto'>
+        <ul className='grid grid-cols-4 gap-10'>
+          {data.allMdx.nodes.map((node) => {
+            if (node.frontmatter.type === "book") {
+              const image = getImage(node.frontmatter.bookCover);
+              return (
+                <li key={node.id}>
+                  <Link to={node.slug}>
+                    <GatsbyImage
+                      className='max-h-full'
+                      image={image}
+                      alt={node.frontmatter.bookTitle}
+                    />
+                  </Link>
+                </li>
+              );
+            }
+          })}
+        </ul>
+      </div>
     </Layout>
   );
 };
